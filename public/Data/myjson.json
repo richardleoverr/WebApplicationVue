@@ -1,0 +1,112 @@
+[
+    {
+        "id": 1,
+        "user": "Dogggooo",
+        "date": "03/10/2024",
+        "profilePicture": "me.png",
+        "postContent": {
+            "image": "dog.jpg",
+            "text": "Ou look its a dog eating a taco!xPPPp",
+            "thumbsUp": "thumbsup.png"
+        }
+    },
+    {
+        "id": 2,
+        "user": "User1111",
+        "date": "04/10/2024",
+        "profilePicture": "me.png",
+        "postContent": {
+            "image": null,
+            "text": "Noo way :DDD hahahahaha",
+            "thumbsUp": "thumbsup.png"
+        }
+    },
+    {
+        "id": 3,
+        "user": "Somebody",
+        "date": "05/10/2024",
+        "profilePicture": "me.png",
+        "postContent": {
+            "image": "windowsxp.jpg",
+            "text": "Look what a cool picture a took yesterdayyy lolool",
+            "thumbsUp": "thumbsup.png"
+        }
+    },
+    {
+        "id": 4,
+        "user": "User1",
+        "date": "07/10/2024",
+        "profilePicture": "me.png",
+        "postContent": {
+            "image": "trippy.jpg",
+            "text": "Wow am I seeing things or does this image seem to be moving...",
+            "thumbsUp": "thumbsup.png"
+        }
+    },
+    {
+        "id": 5,
+        "user": "User1",
+        "date": "07/10/2024",
+        "profilePicture": "me.png",
+        "postContent": {
+            "image": null,
+            "text": "Man idk, seems to be also moving on my screen also",
+            "thumbsUp": "thumbsup.png"
+        }
+    },
+    {
+        "id": 6,
+        "user": "CatLover",
+        "date": "08/10/2024",
+        "profilePicture": "cat2.webp",
+        "postContent": {
+            "image": "cat.webp",
+            "text": "Cat :3",
+            "thumbsUp": "thumbsup.png"
+        }
+    },
+    {
+        "id": 7,
+        "user": "TreeLover",
+        "date": "09/10/2024",
+        "profilePicture": "treelover.jpg",
+        "postContent": {
+            "image": "trees.jpg",
+            "text": "Treeeees",
+            "thumbsUp": "thumbsup.png"
+        }
+    },
+    {
+        "id": 8,
+        "user": "AAAA",
+        "date": "09/10/2024",
+        "profilePicture": "me.png",
+        "postContent": {
+            "image": null,
+            "text": "Cool trees m8",
+            "thumbsUp": "thumbsup.png"
+        }
+    },
+    {
+        "id": 9,
+        "user": "bearLiker",
+        "date": "09/10/2024",
+        "profilePicture": "me.png",
+        "postContent": {
+            "image": "bears.gif",
+            "text": "Sup",
+            "thumbsUp": "thumbsup.png"
+        }
+    },
+    {
+        "id": 10,
+        "user": "BearLover",
+        "date": "09/10/2024",
+        "profilePicture": "me.png",
+        "postContent": {
+            "image": null,
+            "text": "Alright, I hate to be the buzzkill here, but let's get real for a sec: bears do not talk, they don’t drink mojitos, and they definitely don’t wear pants! 😂Bears are all about the wild life—berry foraging, salmon catching, all that good stuff. They’re not gonna be chilling at a bar with their bear buddies, sipping cocktails and sporting jeans! Those thick fur coats are all the outfit they need. And while it's a hilarious thought, I think we should give bears credit for being wild animals, not laid-back party animals! ",
+            "thumbsUp": "thumbsup.png"
+        }
+    }
+]

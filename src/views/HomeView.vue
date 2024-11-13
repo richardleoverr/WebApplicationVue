@@ -1,18 +1,40 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header />
+    <div class="content">
+      <Post v-for="(post, index) in posts" :key="index" :post="post" />
+    </div>
+    <Footer />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Footer from '@/components/Footer.vue';
+import Header from '@/components/Header.vue';
+import Post from '@/components/Post.vue'; 
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    Header,
+    Post,
+    Footer
+  },
+  data() {
+    return {
+      posts: []
+    };
+  },
+  mounted() {
+    
+    fetch('/Data/myjson.json')  
+      .then((response) => response.json())
+      .then((data) => {
+        this.posts = data; 
+      });
   }
 }
 </script>
+
+<style scoped>
+</style>
