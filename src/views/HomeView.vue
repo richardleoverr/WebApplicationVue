@@ -2,7 +2,7 @@
   <div class="home">
     <Header />
     <div class="content">
-      <Post v-for="(post, index) in posts" :key="index" :post="post" />
+      <Post v-for="post in posts" :key="post.id" :post="post" />
     </div>
     <Footer />
   </div>
@@ -11,29 +11,29 @@
 <script>
 import Footer from '@/components/Footer.vue';
 import Header from '@/components/Header.vue';
-import Post from '@/components/Post.vue'; 
+import Post from '@/components/Post.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'HomeView',
   components: {
     Header,
     Post,
-    Footer
+    Footer,
   },
-  data() {
-    return {
-      posts: []
-    };
+  computed: {
+    ...mapGetters(['allPosts']),
+    posts() {
+      return this.allPosts;
+    },
   },
   mounted() {
-    
-    fetch('/Data/myjson.json')  
-      .then((response) => response.json())
-      .then((data) => {
-        this.posts = data; 
-      });
-  }
-}
+    this.fetchPosts();
+  },
+  methods: {
+    ...mapActions(['fetchPosts']),
+  },
+};
 </script>
 
 <style scoped>

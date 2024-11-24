@@ -14,7 +14,7 @@
     </div>
     <div style="display: flex; justify-content: flex-start; flex-direction: row;">
       <img :src="post.postContent.thumbsUp" @click="increaseLike" class="postThumbsup" width="20" height="20" alt="Thumbs up" />
-      <p style="opacity: 1; font-style: normal; margin-left: 20px;">{{ post.likes }}</p>
+      <p style="font-style: normal; margin-left: 20px;">{{ post.likes }}</p>
     </div>
   </div>
 </template>
@@ -23,15 +23,19 @@
 export default {
   name: 'Post',
   props: {
-    post: Object
+    post: Object,
   },
-
+  
   methods: {
     increaseLike() {
-      this.$store.commit(increaseLike, this.post.id)
-    }
-  }
-}
+      if (this.post && this.post.id !== undefined) {
+        this.$store.commit('increaseLike', this.post.id);
+      } else {
+        console.error('Post ID is missing or undefined');
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
