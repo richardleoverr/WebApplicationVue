@@ -28,11 +28,7 @@ export default {
   
   methods: {
     increaseLike() {
-      if (this.post && this.post.id !== undefined) {
-        this.$store.commit('increaseLike', this.post.id);
-      } else {
-        console.error('Post ID is missing or undefined');
-      }
+      this.$store.commit('increaseLike', this.post.id);
     },
   },
 };

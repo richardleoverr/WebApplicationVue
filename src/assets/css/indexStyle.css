@@ -1,14 +1,17 @@
 * {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     box-sizing: border-box;
     border-radius: 15px;
     color: white;
     
 }
 
-a {
+h3 ~ a, h3 ~ p {
     text-decoration: none;
+    font-size: medium;
 }
+
+
 
 body {
     line-height: 1.6;
@@ -37,23 +40,22 @@ ul {  /* class selector*/
     padding-right: 1em;
     padding-left: 1em;
     border: px solid #000000;
-    background-color: #4e4e4e;
+    background-color: #292929;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 1.5em;
-    
-    
+}
+
+.header {
+    background-color: #7c7c7c;
 }
 
 #nav {    
     display: contents; /*id selector*/
     list-style-type: none; 
     margin: 0;
-    
-    
 }
-
  
 
 #nav a, .lis,.dropdown a{  
@@ -76,8 +78,6 @@ ul {  /* class selector*/
 
 .logo {
     padding: 6px 6px 6px 6px;
-    border: white;
-    border-radius: 1px;
 }
 
 
@@ -153,6 +153,7 @@ ul {  /* class selector*/
     height: auto; 
     max-width: 55px; 
     min-width: 10px;
+    border: 1px solid rgb(37, 37, 37);
 }
 
 
