@@ -13,7 +13,8 @@
           <a href="https://www.youtube.com/watch?v=kpnW68Q8ltc">this is also a link</a><br>
           <a href="https://en.meming.world/wiki/Perhaps">perhaps a link</a><br>
           <a>this link doesn't work</a><br>
-          <a href="https://www.youtube.com/watch?v=xuCn8ux2gbs">that link omg</a>
+          <a href="https://www.youtube.com/watch?v=xuCn8ux2gbs">that link omg</a><br>
+          <a @click="resetLikes">reset likes</a>
         </div>
         <div style="padding-right: 50px;">
           <h3>Some copyright stuff (copyright symbol)</h3>
