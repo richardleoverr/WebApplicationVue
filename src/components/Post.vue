@@ -11,7 +11,10 @@
         <img :src="post.postContent.image" class="postPicture" width="40" height="40" alt="Post image" />
       </div>
       <p class="postText">{{ post.postContent.text }}</p>
-      <img :src="post.postContent.thumbsUp" class="postThumbsup" width="20" height="20" alt="Thumbs up" />
+    </div>
+    <div style="display: flex; justify-content: flex-start; flex-direction: row;">
+      <img :src="post.postContent.thumbsUp" @click="increaseLike" class="postThumbsup" width="20" height="20" alt="Thumbs up" />
+      <p style="opacity: 1; font-style: normal; margin-left: 20px;">{{ post.likes }}</p>
     </div>
   </div>
 </template>
@@ -21,6 +24,12 @@ export default {
   name: 'Post',
   props: {
     post: Object
+  },
+
+  methods: {
+    increaseLike() {
+      this.$store.commit(increaseLike, this.post.id)
+    }
   }
 }
 </script>
