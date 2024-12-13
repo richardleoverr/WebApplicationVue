@@ -28,15 +28,18 @@ export default createStore({
     },
   },
   actions: {
-    fetchPosts({ commit }) {
-      return fetch('/Data/myjson.json')
-        .then((response) => response.json())
-        .then((data) => {
-          commit('setPosts', data);
-        })
-        .catch((error) => {
-          console.error('Failed to fetch posts:', error);
-        });
+    async fetchPosts({ commit }) {
+      try {
+        // Fetch data from the Node.js API
+        const response = await fetch('http://localhost:3000/api/posts');
+        if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+        const data = await response.json();
+        commit('setPosts', data);
+      } catch (error) {
+        console.error('Failed to fetch posts:', error);
+      }
     },
   },
 });
