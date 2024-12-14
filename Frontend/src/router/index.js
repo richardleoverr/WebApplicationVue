@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AddPost from '@/views/AddPost.vue'
+import PostView from '@/views/PostView.vue';
 
 const routes = [
   {
@@ -20,7 +21,14 @@ const routes = [
     path: '/addpost',
     name: 'AddPost',
     component: AddPost
+  },
+  {
+    path: '/post/:id',
+    name: 'PostView',
+    component: PostView
   }
+  
+  
 ]
 
 const router = createRouter({
