@@ -30,7 +30,6 @@ export default createStore({
   actions: {
     async fetchPosts({ commit }) {
       try {
-        // Fetch data from the Node.js API
         const response = await fetch('http://localhost:3000/api/posts');
         if (!response.ok) {
           throw new Error('Failed to fetch posts');

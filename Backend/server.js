@@ -159,7 +159,7 @@ startDatabase();
 app.get('/', (req, res) => {
     res.send('Hello');
 });
-// Task 1
+// Adds all posts
 app.post('/api/posts', async (req, res) => {
     try {
         console.log("A POST request has arrived");
@@ -194,7 +194,7 @@ app.post('/api/posts', async (req, res) => {
 
 
 
-// Task 2
+// Get all posts
 app.get('/api/posts', async (req, res) => {
     try {
         console.log("Get posts request has arrived");
@@ -227,7 +227,7 @@ app.get('/api/posts', async (req, res) => {
 
 
 
-// Task 3
+//  
 app.get('/api/posts/:id', async(req, res) => {
     try {
         console.log("get a post with route parameter  request has arrived");
@@ -265,20 +265,19 @@ app.put('/api/posts/:id', async(req, res) => {
 
 
 
-// Task 5
-app.delete('/api/posts/:id', async(req, res) => {
+// Deletes all posts
+app.delete('/api/posts', async (req, res) => {
     try {
-        const { id } = req.params;
-        //const post = req.body; // we do not need a body for a delete request
-        console.log("delete a post request has arrived");
-        const deletepost = await pool.query(
-            "DELETE FROM posttable WHERE id = $1", [id]
+        console.log("Delete all posts request has arrived");
+        const deleteAllPosts = await pool.query(
+            "DELETE FROM posttable"
         );
-        res.json(deletepost);
+        res.json({ message: "All posts have been deleted successfully." });
     } catch (err) {
         console.error(err.message);
+        res.status(500).json({ error: "An error occurred while deleting all posts." });
     }
-}); 
+});
 
 
 app.listen(port, () => {
