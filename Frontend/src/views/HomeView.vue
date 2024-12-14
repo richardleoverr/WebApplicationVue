@@ -37,7 +37,8 @@ export default {
   methods: {
     ...mapActions(['fetchPosts']),
     addPost() {
-      console.log('Add Post button clicked');
+      this.$router.push('/addpost'); 
+      console.log('Navigated to Add Post page');
     },
     async deleteAllPosts() {
       try {
