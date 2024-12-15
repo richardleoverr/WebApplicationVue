@@ -5,8 +5,7 @@
       <li></li>
     </ul>
     <div class="dropdown">
-      <a v-if="!authed" id="signup"><router-link to="/login">Login</router-link></a>
-      <a v-if="authed" id="signup"><router-link to="/login">Log out</router-link></a>
+      <button v-if="this.authed" id="signup" @click="logout">Log out</button>
       <a class="logo" href="#"><img src="me.png" width="50" height="50" alt="My picture"></a>
       <div class="dropdown-content">
         <p>John Doe</p>
@@ -28,12 +27,17 @@ export default {
       authed: false,
     };
   },
+  
+
   methods: {
     async checkAuthStatus() {
       try {
-        const response = await fetch("http://localhost:3000/auth/authenticate");
+        const response = await fetch("http://localhost:3000/auth/authenticate", {
+                credentials: 'include',
+            });
         const data = await response.json();
         this.authed = data.authenticated; // Update auth status based on the response
+        console.log(data.authenticated);
       } catch (error) {
         console.error("Error checking authentication status:", error);
         this.authed = false;
@@ -41,17 +45,19 @@ export default {
     },
     async logout() {
       try {
-        const response = await fetch("/api/logout", {
-          method: "POST",
+        const response = await fetch("http://localhost:3000/auth/logout", {
+          method: "POST", credentials: 'include'
         });
         if (response.ok) {
           this.authed = false; // Update the UI after logout
-          window.location.href = "/login"; // Redirect to login page
+          this.$router.push("/login");
         } else {
           console.error("Failed to log out");
+          this.authed = false;
         }
       } catch (error) {
         console.error("Error during logout:", error);
+        this.authed = false;
       }
     },
   },

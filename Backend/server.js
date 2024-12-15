@@ -331,6 +331,8 @@ app.get('/auth/authenticate', async(req, res) => {
                 } else { // token exists and it is verified 
                     console.log('author is authinticated');
                     authenticated = true;
+                    res.send({ "authenticated": authenticated })
+                    
                 }
             })
         } else { 
@@ -397,7 +399,6 @@ app.post('/auth/login', async(req, res) => {
 app.post('/auth/logout', (req, res) => {
     res.clearCookie('jwt');
     res.send({ message: "Logged out successfully" });
-    window.location.href = "/login";
 });
 
 
