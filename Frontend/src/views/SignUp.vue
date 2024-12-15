@@ -64,6 +64,8 @@ export default {
       this.validationErrors = [];
 
       const password = this.password;
+      console.log(this.email);
+      console.log(password);
 
       if (password.length < 8 || password.length > 15) {
         this.validationErrors.push("Password should be 8-15 characters long.");
@@ -87,7 +89,29 @@ export default {
       if (this.validationErrors.length > 0) {
         this.passwordError = true;
       } else {
-        alert("Signup completed successfully!");
+
+        fetch("http://localhost:3000/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: 'include', 
+        body: JSON.stringify({
+          email: this.email,
+          password: this.password
+        }),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+      console.log(data);
+      this.$router.push("/");
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log("error");
+      });
+        this.$router.push('/'); 
+        console.log('Navigated home');
       }
     },
   },
