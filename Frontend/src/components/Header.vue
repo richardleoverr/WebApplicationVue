@@ -2,7 +2,7 @@
   <header class="header">
     <ul id="nav">
       <li><router-link to="/">Home</router-link></li>
-      <li></li>
+      <li><router-link to="/c">Contact-us</router-link></li>
     </ul>
     <div class="dropdown">
       <button v-if="this.authed" id="signup" @click="logout">Log out</button>

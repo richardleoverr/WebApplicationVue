@@ -135,7 +135,8 @@ const dataToDatabase = async () => {
         for (const post of posts) {
             const { username, date, profilePicture, postContent, likes } = post;
             const { image, text, thumbsUp } = postContent;
-            const formattedDate = new Date(date).toISOString();  
+            const formattedDate = date ? new Date(date).toISOString() : new Date().toISOString();
+
 
             
             await pool.query(
@@ -173,39 +174,36 @@ startDatabase();
 app.get('/', (req, res) => {
     res.send('Hello');
 });
-// Adds all posts
-app.post('/api/posts', async (req, res) => {
-    try {
-        console.log("A POST request has arrived");
-        
-        
-        const { username, date, profilePicture, postContent, likes } = req.body;
-        
-        
-        const { image, text, thumbsUp } = postContent;
-        
-        
-        const formattedDate = new Date(date).toISOString();  
 
-        
-        const newPost = await pool.query(
-            `INSERT INTO posttable (username, post_date, profile_picture, image, post_text, thumbs_up, likes) 
-             VALUES ($1, $2, $3, $4, $5, $6, $7) 
-             RETURNING *`,
-            [username, formattedDate, profilePicture, image, text, thumbsUp, likes]
-        );
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' }); 
 
-        
-        res.json(newPost.rows[0]);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).json({ error: "Server error" });
+app.post('/api/posts', upload.single('image'), async (req, res) => {
+  try {
+    console.log("A POST request has arrived");
+
+    const { username, text, date } = req.body;
+    const image = req.file ? req.file.filename : null; 
+
+    if (!text || !username) {
+      return res.status(400).json({ error: "Missing required fields" });
     }
+
+    const newPost = await pool.query(
+      `INSERT INTO posttable (username, post_date, profile_picture, image, post_text, thumbs_up, likes) 
+       VALUES ($1, $2, $3, $4, $5, $6, $7) 
+       RETURNING *`,
+      [username, date, null, image, text, null, 0]
+    );
+
+    res.json(newPost.rows[0]);
+  } catch (err) {
+    console.error("Error adding post:", err.message);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
-
-
-
+app.use('/uploads', express.static('uploads'));
 
 
 // Get all posts
@@ -288,12 +286,12 @@ app.get('/api/posts/:id', async (req, res) => {
 app.put('/api/posts/:id', async(req, res) => {
     try {
         const { id } = req.params;
-        const post = req.body;
+        const { post_text } = req.body;
         console.log("update request has arrived");
         const updatepost = await pool.query(
-            "UPDATE posttable SET (title, body, urllink) = ($2, $3, $4) WHERE id = $1", [id, post.title, post.body, post.urllink]
+            "UPDATE posttable SET post_text = $1 WHERE id = $2 RETURNING", [post_text, id]
         );
-        res.json(updatepost);
+        res.json(updatepost.rows[0]);
     } catch (err) {
         console.error(err.message);
     }
@@ -306,12 +304,38 @@ app.delete('/api/posts', async (req, res) => {
     try {
         console.log("Delete all posts request has arrived");
         const deleteAllPosts = await pool.query(
-            "DELETE FROM posttable"
+            "DELETE FROM posttable RETURNING"
         );
         res.json({ message: "All posts have been deleted successfully." });
     } catch (err) {
         console.error(err.message);
         res.status(500).json({ error: "An error occurred while deleting all posts." });
+    }
+});
+// Delete single post
+app.delete('/api/posts/:id', async (req, res) => {
+    try {
+        console.log("Delete request for a single post has arrived");
+
+        const { id } = req.params;
+        if (!id || isNaN(parseInt(id))) {
+            return res.status(400).json({ error: "Invalid post ID" });
+        }
+
+        const result = await pool.query(
+            "DELETE FROM posttable WHERE id = $1 RETURNING *", 
+            [id]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: "Post not found" });
+        }
+
+        console.log(`Post with ID ${id} has been deleted`);
+        res.status(200).json({ message: `Post with ID ${id} has been deleted successfully` });
+    } catch (err) {
+        console.error("Error deleting post:", err.message);
+        res.status(500).json({ error: "An error occurred while deleting the post" });
     }
 });
 

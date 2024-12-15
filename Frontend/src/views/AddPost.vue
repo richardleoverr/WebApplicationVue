@@ -19,7 +19,7 @@
               accept="image/*"
             />
           </div>
-          <button type="submit">Submit Post</button>
+          <button type="submit" @click="submitPost">Submit Post</button>
       </div>
       <Footer />
     </div>
@@ -60,6 +60,9 @@
         if (this.postImage) {
           formData.append('image', this.postImage);
         }
+        formData.append('username', 'user');
+        formData.append('date', new Date().toISOString())
+
 
         const response = await fetch('http://localhost:3000/api/posts', {
           method: 'POST',
@@ -70,6 +73,7 @@
           alert('Post added successfully!');
           this.postText = '';
           this.postImage = null;
+          this.$router.push('/');
         } else {
           console.error('Failed to add post');
         }
